@@ -15,7 +15,7 @@ public class DropboxMainPage {
     @FindBy(xpath = "(.//*[normalize-space(text()) and normalize-space(.)='Why Dropbox?'])[1]/following::span[3]")
     public WebElement customersButton;
 
-    @FindBy(xpath = "//div[@id='warp-metadata']/div/nav/div/div[2]/a/span")
+    @FindBy(xpath = "//*[@id=\"warp-metadata\"]/div/nav/div[1]/div[3]/a/span[1]")
     public WebElement getStartedButton;
 
     @FindBy(xpath = "//a[contains(text(),'Buy now')]")

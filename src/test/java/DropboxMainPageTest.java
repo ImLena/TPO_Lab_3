@@ -4,55 +4,76 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 
+import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DropboxMainPageTest {
-    private WebDriver driver;
+    private List<WebDriver> drivers;
     private final InitDriver initDriver = new InitDriver();
     private DropboxMainPage page;
 
     @BeforeEach
-    public void setUp(){
-        driver = initDriver.initWebDriver();
-        page = new DropboxMainPage(driver);
-        driver.get("https://www.dropbox.com/");
+    public void setUp() {
+        drivers = initDriver.initWebDriver();
     }
 
     @Test
     public void paymentTestPlus() {
-        page.getStartedButton.click();
-        page.buyButton.click();
-        assertEquals(driver.getCurrentUrl(), "https://www.dropbox.com/buy/plus");
+        drivers.forEach(driver -> {
+            page = new DropboxMainPage(driver);
+            driver.get("https://www.dropbox.com/");
+            System.out.println("DRIVER RUNING: " + driver.getCurrentUrl() + driver);
+            page.getStartedButton.click();
+            page.buyButton.click();
+            assertEquals(driver.getCurrentUrl(), "https://www.dropbox.com/buy/plus");
+        });
     }
 
     @Test
     public void paymentTestFamily() {
-        page.getStartedButton.click();
-        page.familyButton.click();
-        assertEquals(driver.getCurrentUrl(), "https://www.dropbox.com/buy/family");
+        drivers.forEach(driver -> {
+            page = new DropboxMainPage(driver);
+            driver.get("https://www.dropbox.com/");
+            page.getStartedButton.click();
+            page.familyButton.click();
+            assertEquals(driver.getCurrentUrl(), "https://www.dropbox.com/buy/family");
+        });
     }
 
     @Test
     public void customerStoriesTest() {
-        Actions actions = new Actions(driver);
-        actions.moveToElement(page.whyDropboxButton).build().perform();
-        page.customersButton.click();
-        assertEquals(driver.getCurrentUrl(), "https://www.dropbox.com/business/customers");
+        drivers.forEach(driver -> {
+            page = new DropboxMainPage(driver);
+            driver.get("https://www.dropbox.com/");
+            Actions actions = new Actions(driver);
+            actions.moveToElement(page.whyDropboxButton).build().perform();
+            page.customersButton.click();
+            assertEquals(driver.getCurrentUrl(), "https://www.dropbox.com/business/customers");
+        });
     }
 
     @Test
-    public void changeLanguageTest() throws InterruptedException {
-        JavascriptExecutor jse = (JavascriptExecutor)driver;
-        Thread.sleep(5000);
-        jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-        page.changeLanguage.click();
-        page.russian.click();
-        Thread.sleep(5000);
-        assertEquals(page.html.getAttribute("lang"), "ru");
+    public void changeLanguageTest() {
+        drivers.forEach(driver -> {
+            try {
+                page = new DropboxMainPage(driver);
+                driver.get("https://www.dropbox.com/");
+                System.out.println("DRIVER RUNING: " + driver.getCurrentUrl() + driver);
+                JavascriptExecutor jse = (JavascriptExecutor) driver;
+                Thread.sleep(5000);
+                jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+                page.changeLanguage.click();
+                page.russian.click();
+                Thread.sleep(5000);
+                assertEquals(page.html.getAttribute("lang"), "ru");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     @AfterEach
     public void tearDown() {
-        driver.quit();
+        drivers.forEach(WebDriver::quit);
     }
 }

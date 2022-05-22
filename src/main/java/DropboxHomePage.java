@@ -18,7 +18,8 @@ public class DropboxHomePage {
     @FindBy(xpath = "/html/body/div[9]/div/div/div/div[3]/button[2]/span")
     public WebElement createFolderButton;
 
-    @FindBy(xpath = "//*[@id=\"files-view-table-container\"]/tr[1]/td[3]/div")
+ //   @FindBy(xpath = "//*[@id=\"files-view-table-container\"]/tr[1]/td[3]/div")
+    @FindBy(css = "#files-view-table-container > tr:nth-child(1) > td.mc-table-cell.mc-media-cell.brws-file-shared-with-cell > div > div")
     public WebElement showMoreButton;
 
     @FindBy(xpath = "//*[@id=\"maestro-content-portal\"]/div/div/div/div/div/div/div[1]/div[1]/div[5]/button/span")
