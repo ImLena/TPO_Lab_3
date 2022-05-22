@@ -12,10 +12,7 @@ import java.util.List;
 import java.util.Properties;
 
 public class InitDriver {
-    private final Properties property = new Properties();
- //   private List<WebDriver> drivers;
     private DriverManager driverManager;
-    private FileInputStream fileInputStream;
     private JavascriptExecutor jse;
     @Getter
     private final List<WebDriver> drivers = new ArrayList<>();
@@ -26,7 +23,6 @@ public class InitDriver {
 
     public List<WebDriver> initWebDriver() {
         if (!System.getProperties().containsKey("webdriver.chrome.driver")) {
-           // final String propertyValue = ConfigReader.getPropertyFromConfigFile(CHROME_SYSTEM_PROPERTY_NAME);
             System.setProperty("webdriver.chrome.driver", "/src/test/resources/chromedriver");
             driverManager = DriverFactory.valueOf("CHROME").getDriverManager();
             drivers.add(driverManager.getDriver());
