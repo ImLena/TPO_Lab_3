@@ -14,21 +14,27 @@ import java.util.Properties;
 public class InitDriver {
     private DriverManager driverManager;
     private JavascriptExecutor jse;
+    private FileInputStream fileInputStream;
+    private final Properties property = new Properties();
+
     @Getter
     private final List<WebDriver> drivers = new ArrayList<>();
 
     public InitDriver() {
-        initWebDriver();
+        try {
+            fileInputStream = new FileInputStream("src/main/resources/config.properties");
+            property.load(fileInputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<WebDriver> initWebDriver() {
-        if (!System.getProperties().containsKey("webdriver.chrome.driver")) {
-            System.setProperty("webdriver.chrome.driver", "/src/test/resources/chromedriver");
+        if (property.getProperty("webdriver.chrome.driver").equals("true")) {
             driverManager = DriverFactory.valueOf("CHROME").getDriverManager();
             drivers.add(driverManager.getDriver());
         }
-        if (!System.getProperties().containsKey("webdriver.gecko.driver")) {
-            System.setProperty("webdriver.gecko.driver", "/src/test/resources/geckodriver");
+        if (property.getProperty("webdriver.gecko.driver").equals("true")) {
             driverManager = DriverFactory.valueOf("FIREFOX").getDriverManager();
             drivers.add(driverManager.getDriver());
         }

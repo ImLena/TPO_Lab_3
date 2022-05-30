@@ -2,7 +2,6 @@ import com.example.lab_3.utils.InitDriver;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DropboxHomePageTest {
     private List<WebDriver> drivers;
-    private final InitDriver initDriver = new InitDriver();
+    private InitDriver initDriver = new InitDriver();
     private DropboxHomePage page;
 
     @BeforeEach
@@ -64,7 +63,7 @@ public class DropboxHomePageTest {
                 page.showMore.click();
                 page.showMore.click();
                 page.rename.click();
-                page.renameInput.sendKeys("new1.png");
+                page.renameInput.sendKeys("new1");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -104,7 +103,9 @@ public class DropboxHomePageTest {
     public void deleteFolder(WebDriver driver) throws InterruptedException {
         driver.get("https://www.dropbox.com/home");
         Actions actions = new Actions(driver);
-        actions.moveToElement(page.showMoreButton).click().build().perform();
+        page.removeStupidPanelButton.click();
+        actions.moveToElement(page.showMoreButton).build().perform();
+        page.showOneMoreButton.click();
         page.deleteButton.click();
         Thread.sleep(2000);
         page.deletePopupButton.click();

@@ -15,6 +15,7 @@ public class DropboxMainPageTest {
     @BeforeEach
     public void setUp() {
         drivers = initDriver.initWebDriver();
+        System.out.println("DRIVERS SIZE:" + drivers.size());
     }
 
     @Test
@@ -22,7 +23,7 @@ public class DropboxMainPageTest {
         drivers.forEach(driver -> {
             page = new DropboxMainPage(driver);
             driver.get("https://www.dropbox.com/");
-            System.out.println("DRIVER RUNING: " + driver.getCurrentUrl() + driver);
+            System.out.println("DRIVER RUNNING: " + driver.getCurrentUrl() + driver);
             page.getStartedButton.click();
             page.buyButton.click();
             assertEquals(driver.getCurrentUrl(), "https://www.dropbox.com/buy/plus");

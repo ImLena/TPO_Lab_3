@@ -18,11 +18,17 @@ public class DropboxHomePage {
     @FindBy(xpath = "/html/body/div[9]/div/div/div/div[3]/button[2]/span")
     public WebElement createFolderButton;
 
- //   @FindBy(xpath = "//*[@id=\"files-view-table-container\"]/tr[1]/td[3]/div")
-    @FindBy(css = "#files-view-table-container > tr:nth-child(1) > td.mc-table-cell.mc-media-cell.brws-file-shared-with-cell > div > div")
+    @FindBy(xpath = "//*[@id=\"files-view-table-container\"]/tr[1]/td[4]/div/div")
+   // @FindBy(xpath = "//*[@id=\"files-view-table-container\"]/tr[1]/td[4]/div/div/span/button")
+    //@FindBy(css = "div.rc-inline-action-bar-container.brws-file-row-inline-action-bar > div.dig-Menu > div.dig-ClickOutside > button.dig-IconButton.dig-IconButton--transparent.dig-IconButton--standard > span.dig-IconButton-content > svg.dig-UIIcon.dig-UIIcon--standard")
     public WebElement showMoreButton;
 
-    @FindBy(xpath = "//*[@id=\"maestro-content-portal\"]/div/div/div/div/div/div/div[1]/div[1]/div[5]/button/span")
+    @FindBy(xpath = "(.//*[normalize-space(text()) and normalize-space(.)='Copy link'])[1]/following::*[name()='svg'][2]")
+   // @FindBy(xpath = "//*[@id=\"files-view-table-container\"]/tr[1]/td[4]/div/div/span/button")
+    //@FindBy(css = "div.rc-inline-action-bar-container.brws-file-row-inline-action-bar > div.dig-Menu > div.dig-ClickOutside > button.dig-IconButton.dig-IconButton--transparent.dig-IconButton--standard > span.dig-IconButton-content > svg.dig-UIIcon.dig-UIIcon--standard")
+    public WebElement showOneMoreButton;
+
+    @FindBy(xpath = "(.//*[normalize-space(text()) and normalize-space(.)='Add automation'])[1]/following::div[5]")
     public WebElement deleteButton;
 
     @FindBy(xpath = "//td[2]/div[2]/div/div/form/span/input")
@@ -30,6 +36,9 @@ public class DropboxHomePage {
 
     @FindBy(xpath = "/html/body/div[9]/div/div/div/div[3]/button[2]/span")
     public WebElement deletePopupButton;
+
+    @FindBy(xpath = "//*[@id=\"sidebar-portal\"]/div/div/div/div/div[1]/div[2]/button/span")
+    public WebElement removeStupidPanelButton;
 
     @FindBy(xpath = "//tbody[@id='files-view-table-container']/tr/td[5]/div/button/span")
     public WebElement copyLinkButton;
